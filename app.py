@@ -25,6 +25,24 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="expanded"
 )
+# ==============================
+# SIMPLE POPUP NOTICE (WORKING)
+# ==============================
+
+if "notice_closed" not in st.session_state:
+
+    @st.dialog("🚧 Website Under Development")
+    def show_notice():
+        st.markdown("""
+        Some features may be incomplete or subject to change.
+
+        Please interpret results with appropriate discretion.
+        """)
+        if st.button("I Understand"):
+            st.session_state["notice_closed"] = True
+            st.rerun()
+
+    show_notice()
 
 
 
@@ -354,52 +372,7 @@ st.markdown("""
 @keyframes type  { 0%{width:0} 55%{width:100%} 90%{width:100%} 100%{width:0} }
 @keyframes blink { from,to{border-color:transparent} 50%{border-color:var(--green)} }
 
-/* ===== Popup Notice ===== */
-.notice-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.55);
-  z-index: 9998;
-}
 
-.notice-box {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: #0b1320;
-  border: 1px solid rgba(0,229,255,0.35);
-  border-radius: 16px;
-  padding: 24px 28px 60px;
-  width: 380px;
-  text-align: center;
-  box-shadow: 0 0 30px rgba(0,229,255,0.25);
-  z-index: 9999;
-}
-
-.notice-title {
-  font-family: 'Rajdhani', sans-serif;
-  font-size: 20px;
-  font-weight: 700;
-  color: #00e5ff;
-  margin-bottom: 10px;
-}
-
-.notice-text {
-  font-family: 'DM Sans', sans-serif;
-  font-size: 14px;
-  color: rgba(180,210,255,0.75);
-  line-height: 1.6;
-}
-
-/* Position Streamlit button over popup */
-.notice-btn {
-  position: fixed;
-  top: calc(50% + 70px);
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 10000;
-}
 
 
 
@@ -418,25 +391,6 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 
-# ===== Simple Popup Notice (WORKING) =====
-if "notice_closed" not in st.session_state:
-
-    st.markdown("""
-    <div class="notice-overlay"></div>
-    <div class="notice-box">
-      <div class="notice-title">🚧 Website Under Development</div>
-      <div class="notice-text">
-        Some features may be incomplete or subject to change.<br>
-        Please interpret results with appropriate discretion.
-      </div>
-    </div>
-    """, unsafe_allow_html=True)
-
-    st.markdown('<div class="notice-btn">', unsafe_allow_html=True)
-    if st.button("Close", key="close_notice_btn"):
-        st.session_state["notice_closed"] = True
-        st.rerun()
-    st.markdown('</div>', unsafe_allow_html=True)
 
 # ══════════════════════════════════════════════
 #  LOAD DATA SAFELY
@@ -1023,6 +977,7 @@ st.markdown("""
   <span style="color:rgba(0,229,255,.2);">── ── ── ── ── ── ── ── ──</span>
 </div>
 """, unsafe_allow_html=True)
+
 
 
 
