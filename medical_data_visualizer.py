@@ -9,7 +9,8 @@ df = pd.read_csv('medical_examination.csv')
 # 2
 df['overweight'] = (df['weight'] / ((df['height'] / 100) ** 2) > 25).astype(int)
 
-
+# Convert days to years and round down
+df['age'] = (df['age'] / 365.25).astype(int)
 # 3
 df['cholesterol'] = df['cholesterol'].apply(lambda x: 0 if x == 1 else 1)
 df['gluc'] = df['gluc'].apply(lambda x: 0 if x == 1 else 1)
@@ -65,3 +66,4 @@ def draw_heat_map():
     # 16
     fig.savefig('heatmap.png')
     return fig
+
