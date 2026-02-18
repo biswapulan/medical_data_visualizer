@@ -26,7 +26,7 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 # ══════════════════════════════════════════════
-#  SYSTEM NOTICE (Version-safe modal)
+#  SYSTEM NOTICE (Single, Safe, Closable)
 # ══════════════════════════════════════════════
 
 if "understood" not in st.session_state:
@@ -44,30 +44,7 @@ if "understood" not in st.session_state:
 
     col1, col2, col3 = st.columns([1.4, 2, 1.4])
     with col2:
-        if st.button("✔ Proceed to Dashboard"):
-            st.session_state["understood"] = True
-            st.rerun()
-
-# ══════════════════════════════════════════════
-#  SYSTEM NOTICE (Closable)
-# ══════════════════════════════════════════════
-
-if "understood" not in st.session_state:
-    st.markdown("""
-    <div class="modal-overlay">
-      <div class="modal-card">
-        <div class="modal-title">🚧 Website Under Development</div>
-        <div class="modal-text">
-          Some features may be incomplete or subject to change.<br>
-          Please interpret results with appropriate discretion.
-        </div>
-      </div>
-    </div>
-    """, unsafe_allow_html=True)
-
-    col1, col2, col3 = st.columns([1.4, 2, 1.4])
-    with col2:
-        if st.button("✔ Proceed to Dashboard"):
+        if st.button("✔ Proceed to Dashboard", key="notice_proceed_btn"):
             st.session_state["understood"] = True
             st.rerun()
 
@@ -1051,6 +1028,7 @@ st.markdown("""
   <span style="color:rgba(0,229,255,.2);">── ── ── ── ── ── ── ── ──</span>
 </div>
 """, unsafe_allow_html=True)
+
 
 
 
