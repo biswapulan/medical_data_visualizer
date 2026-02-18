@@ -26,6 +26,56 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
+@st.dialog("System Notice")
+def under_construction_dialog():
+    st.markdown(
+"""<div style="
+background: linear-gradient(160deg, #060d1a, #0b1320);
+border: 1px solid rgba(0,229,255,0.35);
+border-radius: 16px;
+padding: 22px 24px;
+box-shadow: 0 0 28px rgba(0,229,255,0.18);
+">
+
+<div style="
+font-family:'Rajdhani',sans-serif;
+font-size:20px;
+font-weight:700;
+color:#00e5ff;
+margin-bottom:8px;
+text-shadow:0 0 14px rgba(0,229,255,.4);
+">
+🚧 Website Under Development
+</div>
+
+<div style="
+font-family:'DM Sans',sans-serif;
+font-size:14px;
+color:rgba(180,210,255,.75);
+line-height:1.7;
+">
+Some features may be incomplete or subject to change.<br>
+Please interpret results with appropriate discretion.
+</div>
+
+</div>""",
+        unsafe_allow_html=True
+    )
+
+    st.markdown("<br>", unsafe_allow_html=True)
+
+    col1, col2, col3 = st.columns([1.2, 2, 1.2])
+    with col2:
+        if st.button("✔ Proceed to Dashboard"):
+            st.session_state["understood"] = True
+            st.rerun()
+
+
+if "understood" not in st.session_state:
+    under_construction_dialog()
+
+
+
 # ══════════════════════════════════════════════
 #  GLOBAL STYLES
 # ══════════════════════════════════════════════
@@ -952,4 +1002,5 @@ st.markdown("""
   <span style="color:rgba(0,229,255,.2);">── ── ── ── ── ── ── ── ──</span>
 </div>
 """, unsafe_allow_html=True)
+
 
