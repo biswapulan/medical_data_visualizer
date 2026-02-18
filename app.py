@@ -26,26 +26,6 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="expanded"
 )
-# ══════════════════════════════════════════════
-#  SYSTEM NOTICE (Single, Safe, Closable)
-# ══════════════════════════════════════════════
-
-if "understood" not in st.session_state:
-    st.markdown("""
-    <div class="modal-overlay">
-      <div class="modal-card">
-        <div class="modal-title">🚧 Website Under Development</div>
-        <div class="modal-text">
-          Some features may be incomplete or subject to change.<br>
-          Please interpret results with appropriate discretion.
-        </div>
-      </div>
-    </div>
-    """, unsafe_allow_html=True)
-
-    time.sleep(2.5)  # seconds
-    st.session_state["understood"] = True
-    st.rerun()
 
 
 
@@ -396,50 +376,25 @@ st.markdown("""
 <style>
 /* existing styles above */
 
-/* ══════════════════════
-   MODAL OVERLAY
-══════════════════════ */
-.modal-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(4,8,15,0.75);
-  backdrop-filter: blur(6px);
-  z-index: 9999;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+@st.dialog("⚠️ Site Under Construction")
+def under_construction():
+    st.warning(
+        """
+        🚧 **This site is currently under construction**
 
-.modal-card {
-  width: 420px;
-  background: linear-gradient(160deg, #060d1a, #0b1320);
-  border: 1px solid rgba(0,229,255,0.35);
-  border-radius: 18px;
-  padding: 26px 28px 22px;
-  box-shadow: 0 0 38px rgba(0,229,255,0.25);
-}
+        - Further modifications are ongoing  
+        - Some features may not work as expected  
+        - Errors may still be present  
 
-.modal-title {
-  font-family: 'Rajdhani', sans-serif;
-  font-size: 22px;
-  font-weight: 700;
-  color: #00e5ff;
-  margin-bottom: 10px;
-  text-shadow: 0 0 14px rgba(0,229,255,.45);
-}
+        ⚠️ Please be cautious before making any conclusions based on this data.
+        """
+    )
+    st.button("I Understand")
 
-.modal-text {
-  font-family: 'DM Sans', sans-serif;
-  font-size: 14px;
-  color: rgba(180,210,255,.75);
-  line-height: 1.7;
-}
-
-/* existing styles below */
-</style>
-""", unsafe_allow_html=True)
-
-
+# Show dialog only once per session
+if "understood" not in st.session_state:
+    under_construction()
+    st.session_state["understood"] = True
 
 
 
@@ -1028,6 +983,7 @@ st.markdown("""
   <span style="color:rgba(0,229,255,.2);">── ── ── ── ── ── ── ── ──</span>
 </div>
 """, unsafe_allow_html=True)
+
 
 
 
