@@ -4,7 +4,6 @@ import pandas as pd
 import numpy as np
 import base64
 import os
-import time
 
 # ── Helper: load a local JPG/PNG and convert to base64 for HTML embedding ──
 def img_to_base64(path: str) -> str | None:
@@ -25,6 +24,27 @@ st.set_page_config(
     page_icon="🫀",
     layout="wide",
     initial_sidebar_state="expanded"
+
+    # ===== Simple Popup Notice =====
+if "notice_closed" not in st.session_state:
+    st.markdown("""
+    <div class="notice-overlay">
+      <div class="notice-box">
+        <div class="notice-title">🚧 Website Under Development</div>
+        <div class="notice-text">
+          Some features may be incomplete or subject to change.<br>
+          Please interpret results with appropriate discretion.
+        </div>
+      </div>
+    </div>
+    """, unsafe_allow_html=True)
+
+    _, col, _ = st.columns([1, 2, 1])
+    with col:
+        if st.button("Close", key="close_notice_btn"):
+            st.session_state["notice_closed"] = True
+            st.rerun()
+
 )
 
 
@@ -354,6 +374,43 @@ st.markdown("""
 }
 @keyframes type  { 0%{width:0} 55%{width:100%} 90%{width:100%} 100%{width:0} }
 @keyframes blink { from,to{border-color:transparent} 50%{border-color:var(--green)} }
+
+/* ===== Simple Popup Notice ===== */
+.notice-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.notice-box {
+  background: #0b1320;
+  border: 1px solid rgba(0,229,255,0.3);
+  border-radius: 14px;
+  padding: 22px 26px;
+  width: 380px;
+  text-align: center;
+  box-shadow: 0 0 30px rgba(0,229,255,0.25);
+}
+
+.notice-title {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: #00e5ff;
+  margin-bottom: 10px;
+}
+
+.notice-text {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  color: rgba(180,210,255,0.75);
+  line-height: 1.6;
+}
+
 
 /* ══════════════════════
    HEARTBEAT LINE (decoration)
@@ -956,6 +1013,7 @@ st.markdown("""
   <span style="color:rgba(0,229,255,.2);">── ── ── ── ── ── ── ── ──</span>
 </div>
 """, unsafe_allow_html=True)
+
 
 
 
