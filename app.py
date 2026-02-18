@@ -387,7 +387,7 @@ elif avg_age_raw > 365:
 else:
     avg_age_str = str(int(round(avg_age_raw)))
 
-high_chol    = int(df[df['cholesterol'] > 1].shape[0]) if 'cholesterol' in df.columns else 0
+high_chol    = int(df[df['cholesterol'] > 0].shape[0]) if 'cholesterol' in df.columns else 0
 cardio_cases = int(df['cardio'].sum())                  if 'cardio'      in df.columns else 0
 cardio_pct   = round(cardio_cases / total_patients * 100, 1) if total_patients else 0
 
@@ -952,3 +952,4 @@ st.markdown("""
   <span style="color:rgba(0,229,255,.2);">── ── ── ── ── ── ── ── ──</span>
 </div>
 """, unsafe_allow_html=True)
+
