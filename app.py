@@ -369,33 +369,6 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# /* ══════════════════════
-#    MODAL OVERLAY
-# ══════════════════════ */
-st.markdown("""
-<style>
-/* existing styles above */
-
-@st.dialog("⚠️ Site Under Construction")
-def under_construction():
-    st.warning(
-        """
-        🚧 **This site is currently under construction**
-
-        - Further modifications are ongoing  
-        - Some features may not work as expected  
-        - Errors may still be present  
-
-        ⚠️ Please be cautious before making any conclusions based on this data.
-        """
-    )
-    st.button("I Understand")
-
-# Show dialog only once per session
-if "understood" not in st.session_state:
-    under_construction()
-    st.session_state["understood"] = True
-
 
 
 # ══════════════════════════════════════════════
@@ -983,6 +956,7 @@ st.markdown("""
   <span style="color:rgba(0,229,255,.2);">── ── ── ── ── ── ── ── ──</span>
 </div>
 """, unsafe_allow_html=True)
+
 
 
 
