@@ -24,27 +24,6 @@ st.set_page_config(
     page_icon="🫀",
     layout="wide",
     initial_sidebar_state="expanded"
-
-    # ===== Simple Popup Notice =====
-if "notice_closed" not in st.session_state:
-    st.markdown("""
-    <div class="notice-overlay">
-      <div class="notice-box">
-        <div class="notice-title">🚧 Website Under Development</div>
-        <div class="notice-text">
-          Some features may be incomplete or subject to change.<br>
-          Please interpret results with appropriate discretion.
-        </div>
-      </div>
-    </div>
-    """, unsafe_allow_html=True)
-
-    _, col, _ = st.columns([1, 2, 1])
-    with col:
-        if st.button("Close", key="close_notice_btn"):
-            st.session_state["notice_closed"] = True
-            st.rerun()
-
 )
 
 
@@ -427,7 +406,24 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 
+if "notice_closed" not in st.session_state:
+    st.markdown("""
+    <div class="notice-overlay">
+      <div class="notice-box">
+        <div class="notice-title">🚧 Website Under Development</div>
+        <div class="notice-text">
+          Some features may be incomplete or subject to change.<br>
+          Please interpret results with appropriate discretion.
+        </div>
+      </div>
+    </div>
+    """, unsafe_allow_html=True)
 
+    _, col, _ = st.columns([1, 2, 1])
+    with col:
+        if st.button("Close", key="close_notice_btn"):
+            st.session_state["notice_closed"] = True
+            st.rerun()
 # ══════════════════════════════════════════════
 #  LOAD DATA SAFELY
 # ══════════════════════════════════════════════
@@ -1013,6 +1009,7 @@ st.markdown("""
   <span style="color:rgba(0,229,255,.2);">── ── ── ── ── ── ── ── ──</span>
 </div>
 """, unsafe_allow_html=True)
+
 
 
 
