@@ -406,7 +406,10 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 
+# ===== Simple Popup Notice (WITH button inside) =====
 if "notice_closed" not in st.session_state:
+
+    # Popup UI
     st.markdown("""
     <div class="notice-overlay">
       <div class="notice-box">
@@ -415,15 +418,21 @@ if "notice_closed" not in st.session_state:
           Some features may be incomplete or subject to change.<br>
           Please interpret results with appropriate discretion.
         </div>
+        <div id="notice-btn"></div>
       </div>
     </div>
     """, unsafe_allow_html=True)
 
-    _, col, _ = st.columns([1, 2, 1])
-    with col:
+    # Button rendered exactly where <div id="notice-btn"></div> is
+    with st.container():
+        st.markdown(
+            "<style>#notice-btn + div { text-align:center; margin-top:14px; }</style>",
+            unsafe_allow_html=True
+        )
         if st.button("Close", key="close_notice_btn"):
             st.session_state["notice_closed"] = True
             st.rerun()
+
 # ══════════════════════════════════════════════
 #  LOAD DATA SAFELY
 # ══════════════════════════════════════════════
@@ -1009,6 +1018,7 @@ st.markdown("""
   <span style="color:rgba(0,229,255,.2);">── ── ── ── ── ── ── ── ──</span>
 </div>
 """, unsafe_allow_html=True)
+
 
 
 
