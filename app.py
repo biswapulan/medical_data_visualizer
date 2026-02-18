@@ -354,25 +354,27 @@ st.markdown("""
 @keyframes type  { 0%{width:0} 55%{width:100%} 90%{width:100%} 100%{width:0} }
 @keyframes blink { from,to{border-color:transparent} 50%{border-color:var(--green)} }
 
-/* ===== Simple Popup Notice ===== */
+/* ===== Popup Notice ===== */
 .notice-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.55);
-  z-index: 9999;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  background: rgba(0,0,0,0.55);
+  z-index: 9998;
 }
 
 .notice-box {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   background: #0b1320;
-  border: 1px solid rgba(0,229,255,0.3);
-  border-radius: 14px;
-  padding: 22px 26px;
+  border: 1px solid rgba(0,229,255,0.35);
+  border-radius: 16px;
+  padding: 24px 28px 60px;
   width: 380px;
   text-align: center;
   box-shadow: 0 0 30px rgba(0,229,255,0.25);
+  z-index: 9999;
 }
 
 .notice-title {
@@ -390,6 +392,16 @@ st.markdown("""
   line-height: 1.6;
 }
 
+/* Position Streamlit button over popup */
+.notice-btn {
+  position: fixed;
+  top: calc(50% + 70px);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10000;
+}
+
+
 
 /* ══════════════════════
    HEARTBEAT LINE (decoration)
@@ -406,32 +418,25 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 
-# ===== Simple Popup Notice (WITH button inside) =====
+# ===== Simple Popup Notice (WORKING) =====
 if "notice_closed" not in st.session_state:
 
-    # Popup UI
     st.markdown("""
-    <div class="notice-overlay">
-      <div class="notice-box">
-        <div class="notice-title">🚧 Website Under Development</div>
-        <div class="notice-text">
-          Some features may be incomplete or subject to change.<br>
-          Please interpret results with appropriate discretion.
-        </div>
-        <div id="notice-btn"></div>
+    <div class="notice-overlay"></div>
+    <div class="notice-box">
+      <div class="notice-title">🚧 Website Under Development</div>
+      <div class="notice-text">
+        Some features may be incomplete or subject to change.<br>
+        Please interpret results with appropriate discretion.
       </div>
     </div>
     """, unsafe_allow_html=True)
 
-    # Button rendered exactly where <div id="notice-btn"></div> is
-    with st.container():
-        st.markdown(
-            "<style>#notice-btn + div { text-align:center; margin-top:14px; }</style>",
-            unsafe_allow_html=True
-        )
-        if st.button("Close", key="close_notice_btn"):
-            st.session_state["notice_closed"] = True
-            st.rerun()
+    st.markdown('<div class="notice-btn">', unsafe_allow_html=True)
+    if st.button("Close", key="close_notice_btn"):
+        st.session_state["notice_closed"] = True
+        st.rerun()
+    st.markdown('</div>', unsafe_allow_html=True)
 
 # ══════════════════════════════════════════════
 #  LOAD DATA SAFELY
@@ -1018,6 +1023,7 @@ st.markdown("""
   <span style="color:rgba(0,229,255,.2);">── ── ── ── ── ── ── ── ──</span>
 </div>
 """, unsafe_allow_html=True)
+
 
 
 
