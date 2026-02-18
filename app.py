@@ -392,6 +392,13 @@ st.markdown("""
 # /* ══════════════════════
 #    MODAL OVERLAY
 # ══════════════════════ */
+st.markdown("""
+<style>
+/* existing styles above */
+
+/* ══════════════════════
+   MODAL OVERLAY
+══════════════════════ */
 .modal-overlay {
   position: fixed;
   inset: 0;
@@ -427,6 +434,11 @@ st.markdown("""
   color: rgba(180,210,255,.75);
   line-height: 1.7;
 }
+
+/* existing styles below */
+</style>
+""", unsafe_allow_html=True)
+
 
 
 
@@ -1016,6 +1028,7 @@ st.markdown("""
   <span style="color:rgba(0,229,255,.2);">── ── ── ── ── ── ── ── ──</span>
 </div>
 """, unsafe_allow_html=True)
+
 
 
 
