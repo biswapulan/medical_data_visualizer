@@ -4,6 +4,7 @@ import pandas as pd
 import numpy as np
 import base64
 import os
+import time
 
 # ── Helper: load a local JPG/PNG and convert to base64 for HTML embedding ──
 def img_to_base64(path: str) -> str | None:
@@ -42,11 +43,10 @@ if "understood" not in st.session_state:
     </div>
     """, unsafe_allow_html=True)
 
-    col1, col2, col3 = st.columns([1.4, 2, 1.4])
-    with col2:
-        if st.button("✔ Proceed to Dashboard", key="notice_proceed_btn"):
-            st.session_state["understood"] = True
-            st.rerun()
+    time.sleep(2.5)  # seconds
+    st.session_state["understood"] = True
+    st.rerun()
+
 
 
 # ══════════════════════════════════════════════
@@ -1028,6 +1028,7 @@ st.markdown("""
   <span style="color:rgba(0,229,255,.2);">── ── ── ── ── ── ── ── ──</span>
 </div>
 """, unsafe_allow_html=True)
+
 
 
 
