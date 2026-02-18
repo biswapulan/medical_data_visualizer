@@ -29,20 +29,7 @@ st.set_page_config(
 # SIMPLE POPUP NOTICE (WORKING)
 # ==============================
 
-# ==============================
-# SIMPLE NOTICE (VERSION-SAFE)
-# ==============================
-
-if "notice_closed" not in st.session_state:
-    st.warning(
-        "🚧 **Website Under Development**\n\n"
-        "Some features may be incomplete or subject to change.\n\n"
-        "Please interpret results with appropriate discretion."
-    )
-    if st.button("I Understand"):
-        st.session_state["notice_closed"] = True
-        st.rerun()
-
+# =========================
 
 
 # ══════════════════════════════════════════════
@@ -976,6 +963,7 @@ st.markdown("""
   <span style="color:rgba(0,229,255,.2);">── ── ── ── ── ── ── ── ──</span>
 </div>
 """, unsafe_allow_html=True)
+
 
 
 
